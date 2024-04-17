@@ -14,15 +14,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubjectControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
+    // テストを実行した後にDBに不要なデータが残らないようにしてくれるトランザクション
+    use DatabaseTransactions;
 }

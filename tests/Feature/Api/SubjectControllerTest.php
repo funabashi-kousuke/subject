@@ -9,6 +9,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 // Subjectモデルをインポート
 use App\Models\Subject;
+// factoryが使えるようになる
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubjectControllerTest extends TestCase
 {

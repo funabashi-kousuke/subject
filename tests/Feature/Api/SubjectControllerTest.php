@@ -148,7 +148,7 @@ class SubjectControllerTest extends TestCase
         $res->assertJson([
             'company' => $subject->company,
             'address' => $subject->address,
-            'telephone' => '01234567891',
+            'telephone' => $subject->telephone,
             'representative' => $subject->representative
         ]);
     }

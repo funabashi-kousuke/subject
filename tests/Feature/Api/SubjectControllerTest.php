@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Api;
 
+// Subjectモデルをインポート
+use App\Models\Subject;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 //テストを実行しているあいだだけ有効なトランザクション を作ってくれるトレイト
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-// Subjectモデルをインポート
-use App\Models\Subject;
 // factoryが使えるようになる
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -30,10 +30,10 @@ class SubjectControllerTest extends TestCase
     public function 会社情報の新規作成()
     {
         $params = [
-            'company' => '太郎会社/たろうがいしゃ',
+            'company' => '太郎会社',
             'address' => '東京都',
-            'telephone' => '00000000000',
-            'representative' => '太郎/たろう'
+            'telephone' => '000000000000',
+            'representative' => '太郎'
         ];
 
         //Subjectコントローラーで定義したcreateメソッドにアクセスがあった場合、変数$resに上で定義した$paramsを格納

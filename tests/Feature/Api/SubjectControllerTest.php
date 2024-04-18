@@ -119,5 +119,20 @@ class SubjectControllerTest extends TestCase
         $res->assertstatus(422);
     }
 
+    /**
+     * @test
+     */
+    public function Subjectの新規登録時にtelephoneの値がーやアルファベットで構成されていた場合に新規登録が失敗する()
+    {
+        $params = [
+            'company' => '太郎会社/たろうがいしゃ',
+            'address' => '東京都',
+            'telephone' => 'aaaaaaaaaa',
+            'representative' => '太郎/たろう'
+        ];
+
+        $res = $this->postJson(route('api.subject.create'), $params);
+        $res->assertstatus(422);
+    }
 // storeアクションに関するテスト
 }

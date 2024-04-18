@@ -44,4 +44,16 @@ class SubjectController extends Controller
 
         return ['message' => 'ok'];
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $subject = Subject::FindOrFail($id);
+        return response()->json( $subject );
+    }
 }

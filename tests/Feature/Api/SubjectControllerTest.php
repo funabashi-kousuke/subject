@@ -87,5 +87,21 @@ class SubjectControllerTest extends TestCase
         $res->assertstatus(422);
     }
 
+    /**
+     * @test
+     */
+    public function Subjectの新規登録時にteleponeがnullだった場合に新規登録が失敗する()
+    {
+        $params = [
+            'company' => '太郎',
+            'address' => '東京都',
+            'telephone' => null,
+            'representative' => '太郎/たろう'
+        ];
+
+        $res = $this->postJson(route('api.subject.create'), $params);
+        $res->assertstatus(422);
+    }
+
 // storeアクションに関するテスト
 }

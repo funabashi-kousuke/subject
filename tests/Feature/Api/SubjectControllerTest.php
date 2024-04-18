@@ -24,6 +24,7 @@ class SubjectControllerTest extends TestCase
         parent::setUp();
     }
 
+// storeアクションに関するテスト
     /**
      * @test
      */
@@ -53,4 +54,23 @@ class SubjectControllerTest extends TestCase
         $this->assertEquals($params['telephone'], $subject->telephone);
         $this->assertEquals($params['representative'], $subject->representative);
     }
+
+    /**
+     * @test
+     */
+    public function Subjectの新規登録時にcompanyがnullだった場合に新規登録が失敗する()
+    {
+        $params = [
+            'company' => null,
+            'address' => '東京都',
+            'telephone' => '00000000000',
+            'representative' => '太郎/たろう'
+        ];
+
+        $res = $this->postJson(route('api.subject.create'), $params);
+        $res->assertstatus(422);
+    }
+
+    
+// storeアクションに関するテスト
 }

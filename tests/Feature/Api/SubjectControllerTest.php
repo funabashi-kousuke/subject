@@ -163,4 +163,27 @@ class SubjectControllerTest extends TestCase
         $res->assertstatus(404);
     }
 //showアクションに関するテスト
+
+//updateアクションに関するテスト
+    /**
+     * @test
+     */
+    public function Subjectの更新処理が成功する()
+    {
+        $subject = Subject::factory()->create();
+        $res = $this->putJson(route('api.subject.update',$subject->id), [
+            'company' => '太郎会社/たろうがいしゃ',
+            'address' => '東京都',
+            'telephone' => '1234567891',
+            'representative' => '太郎/たろう'
+        ]);
+
+        $this->assertDatabaseHas('subjects', [
+            'company' => '太郎会社/たろうがいしゃ',
+            'address' => '東京都',
+            'telephone' => '1234567891',
+            'representative' => '太郎/たろう'
+        ]);
+    }
+//updateアクションに関するテスト
 }

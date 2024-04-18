@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('subject/create', [SubjectController::class, 'store'])->name('api.subject.create');
 Route::get('subject/show/{id}', [SubjectController::class, 'show'])->name('api.subject.show');
-
+Route::put('subject/update/{id}', [SubjectController::class, 'update'])->name('api.subject.update');

@@ -9,5 +9,9 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    //
+    // コンストラクタ(アクションが呼び出されるたびに自動で実行されるコード)
+    public function __construct(
+    //  $subjectをSubjectモデルクラスのオブジェクトとしてインスタンス化
+    private Subject $subject
+    ) {}
 }

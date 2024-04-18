@@ -185,5 +185,18 @@ class SubjectControllerTest extends TestCase
             'representative' => '太郎/たろう'
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function 更新処理の際にcompanyがnullだった場合に更新処理が失敗する()
+    {
+        $subject = Subject::factory()->create();
+        $res = $this->putJson(route('api.subject.update',$subject->id), [
+            'company' => null
+        ]);
+
+        $res->assertstatus(422);
+    }
 //updateアクションに関するテスト
 }

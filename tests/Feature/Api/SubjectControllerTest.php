@@ -135,4 +135,22 @@ class SubjectControllerTest extends TestCase
         $res->assertstatus(422);
     }
 // storeアクションに関するテスト
+
+//showアクションに関するテスト
+    /**
+     * @test
+     */
+    public function 詳細取得が成功する()
+    {
+        $subject = Subject::factory()->create();
+        $res = $this->getJson(route('api.subject.show',$subject->id));
+        $res->assertstatus(200);
+        $res->assertJson([
+            'company' => $subject->company,
+            'address' => $subject->address,
+            'telephone' => '01234567891',
+            'representative' => $subject->representative
+        ]);
+    }
+//showアクションに関するテスト
 }

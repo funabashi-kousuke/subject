@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('subject/create', [SubjectController::class, 'store'])->name('api.subject.create');
+Route::get('assignment/show/{id}', [AssignmentController::class, 'show'])->name('api.assignment.show');
 

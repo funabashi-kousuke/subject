@@ -56,4 +56,24 @@ class SubjectController extends Controller
         $subject = Subject::FindOrFail($id);
         return response()->json( $subject );
     }
+
+    /**
+     * Update the specified resource in storage.
+     * update function
+     * @param  Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, int $id)
+    {
+        $validated = $request->validate([
+            'company' => ['required','string'],
+            'address' => ['required','string'],
+            'telephone' => ['required','regex:/^[0-9]+$/'],
+            'representative' => ['required','string']
+        ]);
+        $this->subject->findOrFail($id)->update($validated);
+        return response()->json($validated);
+
+    }
 }

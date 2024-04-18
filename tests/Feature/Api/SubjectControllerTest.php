@@ -152,5 +152,15 @@ class SubjectControllerTest extends TestCase
             'representative' => $subject->representative
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function 存在しないidが指定された場合は詳細取得が失敗する()
+    {
+        $subject = Subject::factory()->create();
+        $res = $this->getJson(route('api.subject.show',++$subject->id));
+        $res->assertstatus(404);
+    }
 //showアクションに関するテスト
 }

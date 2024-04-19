@@ -271,17 +271,21 @@ class SubjectControllerTest extends TestCase
      */
     public function 削除が成功する(): void
     {
-        // 会社情報を作成してdbに保存されているかを確認
-        $subject = Subject::factory()->create();
-        $this->assertDatabaseHas('subjects', [
+        // idが1の会社情報を作成してdbに保存
+        $subject = Subject::factory()->create([
+            'id' => 1,
+        ]);
+        // idが1でfactoryで作成されたデータがdb内に存在するかを確認
+        $this->assertDatabaseHas(Subject::Class, [
+            'id' => $subject->id, /** idは1 */
             'company' => $subject->company,
             'address' => $subject->address,
             'telephone' => $subject->telephone,
             'representative' => $subject->representative
         ]);
 
-        // // 削除処理
-        // $this->delete(route('api.todo.destroy', $todo->id));
+        // 削除処理
+        // $this->delete(route('api.subject.destroy', $subject->id));
         // $this->assertDatabaseMissing('todos', [
         //     'title' => 'タイトル',
         //     'content' => 'コンテンツ'

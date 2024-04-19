@@ -250,5 +250,18 @@ class SubjectControllerTest extends TestCase
 
         $res->assertstatus(422);
     }
+
+    /**
+     * @test
+     */
+    public function 更新処理の際にtelephoneが平仮名だった場合に更新処理が失敗する()
+    {
+        $subject = Subject::factory()->create();
+        $res = $this->putJson(route('api.subject.update',$subject->id), [
+            'telephone' => 'あいうえおかきくけこ'
+        ]);
+
+        $res->assertstatus(422);
+    }
 //updateアクションに関するテスト
 }

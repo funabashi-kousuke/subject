@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     use HasFactory;
+    // 論理削除用トレイト
+    use SoftDeletes;
     /**
     *ドキュメントコメント(このメソッドの返り値を表している)
     * @var array

@@ -284,12 +284,11 @@ class SubjectControllerTest extends TestCase
             'representative' => $subject->representative
         ]);
 
-        // 削除処理
-        // $this->delete(route('api.subject.destroy', $subject->id));
-        // $this->assertDatabaseMissing('todos', [
-        //     'title' => 'タイトル',
-        //     'content' => 'コンテンツ'
-        // ]);
+        // 275行目で作成した$subject(id=1)のレコードを削除してdb内にid=1のレコードが存在しないかを確認
+        $this->delete(route('api.subject.destroy', $subject->id));
+        $this->assertDatabaseMissing(Subject::Class, [
+            'id' => 1
+        ]);
     }
 // dleteに関するテスト
 }

@@ -19,11 +19,11 @@ class Subject extends Model
     */
 
     // $fillable = 複数代入の脆弱性に対応するために必要
-    protected $fillable = ['company', 'address','telephone','representative'];
+    protected $fillable = ['company', 'address','telephone','representative','deleted_at'];
 
     /**
      *ドキュメントコメント
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['created_at', 'updated_at','deleted_at'];
 }

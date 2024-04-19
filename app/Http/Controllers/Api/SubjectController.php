@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Subject;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubjectController extends Controller
 {

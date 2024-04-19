@@ -286,8 +286,8 @@ class SubjectControllerTest extends TestCase
 
         // 275行目で作成した$subject(id=1)のレコードを削除してdb内にid=1のレコードが存在しないかを確認
         $this->delete(route('api.subject.destroy', $subject->id));
-        $this->assertDatabaseMissing(Subject::Class, [
-            'id' => 1
+        $this->assertSoftDeleted(Subject::Class, [
+            'id' => 1,
         ]);
     }
 // dleteに関するテスト

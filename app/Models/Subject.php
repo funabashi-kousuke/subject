@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+// 論理削除用トレイト
+use Illuminate\Database\Eloquent\SoftDeletes;
+//  factory用トレイト
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+// モデルをインポート
 use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
     use HasFactory;
-    // 論理削除用トレイト
     use SoftDeletes;
     /**
     *ドキュメントコメント(このメソッドの返り値を表している)

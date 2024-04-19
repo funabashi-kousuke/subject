@@ -264,4 +264,8 @@ class SubjectControllerTest extends TestCase
         $res->assertstatus(422);
     }
 //updateアクションに関するテスト
+
+// deleteに関するテスト
+    
+// dleteに関するテスト
 }

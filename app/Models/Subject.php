@@ -11,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
+    public fuction (){
+        return $this->hasMany(Post::class)
+    }
+
     use HasFactory;
     use SoftDeletes;
     /**

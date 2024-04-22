@@ -15,6 +15,16 @@ class CreateBillingCompaniesTable extends Migration
     {
         Schema::create('billing_companies', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('subjects_id')->constrained();
+            // 請求先会社
+            $table->string('billing_companie');
+            // 住所
+            $table->string('address');
+            // 電話番号
+            $table->string('telephone');
+            //請求先部署
+            $table->string('billing_department');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

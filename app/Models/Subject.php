@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\BillingCompany;
 // 論理削除用トレイト
 use Illuminate\Database\Eloquent\SoftDeletes;
 //  factory用トレイト
@@ -11,8 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    public fuction (){
-        return $this->hasMany(Post::class)
+    public function billing_companys()
+    {
+        return $this->hasMany(BillingCompany::class);
     }
 
     use HasFactory;

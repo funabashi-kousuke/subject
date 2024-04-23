@@ -12,13 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
+
+    use HasFactory;
+    use SoftDeletes;
+    use BillingCompany;
+
     public function billing_companys()
     {
         return $this->hasMany(BillingCompany::class);
     }
-
-    use HasFactory;
-    use SoftDeletes;
     /**
     *ドキュメントコメント(このメソッドの返り値を表している)
     * @var array

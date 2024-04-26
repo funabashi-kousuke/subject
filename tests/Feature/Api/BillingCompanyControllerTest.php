@@ -5,7 +5,7 @@ namespace Tests\Feature\Api;
 // BillingCompanyモデルをインポート
 use App\Models\BillingCompany;
 // Subjectモデルをインポート
-use App\Models\Subject;
+// use App\Models\Subject;
 // factoryが使えるようになる
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 //テストを実行しているあいだだけ有効なトランザクション を作ってくれるトレイト
@@ -16,7 +16,7 @@ use Tests\TestCase;
 
 class BillingCompanyControllerTest extends TestCase
 {
-    use DatabaseTransaction;
+    use DatabaseTransactions;
     use Subject;
 
      // この中に各テストが実行されるたびにしたい処理などがあれば書く
@@ -42,7 +42,9 @@ class BillingCompanyControllerTest extends TestCase
         ];
 
         $res = $this->postJson(route('api.billing_company.create'), $params);
-        dd($res);
+
+        $res = assertOK();
+        // dd($res);
     }
     // storeアクションに関するテスト
 }

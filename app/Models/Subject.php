@@ -13,9 +13,13 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
 
+    public function test()
+    {
+        return 'ok';
+    }
+
     use HasFactory;
     use SoftDeletes;
-    use BillingCompany;
 
     public function billing_companys()
     {

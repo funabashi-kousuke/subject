@@ -4,8 +4,7 @@ namespace Tests\Feature\Api;
 
 // BillingCompanyモデルをインポート
 use App\Models\BillingCompany;
-// Subjectモデルをインポート
-// use App\Models\Subject;
+use App\Models\Subject;
 // factoryが使えるようになる
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 //テストを実行しているあいだだけ有効なトランザクション を作ってくれるトレイト
@@ -17,7 +16,6 @@ use Tests\TestCase;
 class BillingCompanyControllerTest extends TestCase
 {
     use DatabaseTransactions;
-    use Subject;
 
      // この中に各テストが実行されるたびにしたい処理などがあれば書く
     // :voidはタイプヒンティングと呼ばれるもの
@@ -32,19 +30,24 @@ class BillingCompanyControllerTest extends TestCase
      */
     public function 請求先情報の登録()
     {
+        $subject = Subject::factory()->create();
         $params = [
-            'subjects_id' => '1',
+            // 外部キー制約をかけた親モデルのPK
+            'subjects_id' => $subject->id,
+            // 請求元会社名
             'billing_source' => '太郎会社',
+            // 請求先会社名
             'billing_companie' => 'jirou会社',
+            // 住所
             'address' => '東京都',
+            // 電話番号
             'telephone' => '0123456789',
+            // 部署名
             'billing_department' => 'A部'
         ];
 
         $res = $this->postJson(route('api.billing_company.create'), $params);
-
-        $res = assertOK();
-        // dd($res);
+        $res->assertOK();
     }
     // storeアクションに関するテスト
 }

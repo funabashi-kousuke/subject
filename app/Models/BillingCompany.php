@@ -11,14 +11,13 @@ use Illuminate\Database\Eloquent\Model;
 class BillingCompany extends Model
 {
     use HasFactory;
-    use Subject;
     use SoftDeletes;
     /**
     * 請求先情報を所有している会社情報を取得
      */
     public function subject()
     {
-        return $this->belongsTo(Subject::class, 'foreign_key');
+        return $this->belongsTo(Subject::class);
     }
 
     /**
@@ -27,7 +26,7 @@ class BillingCompany extends Model
     */
 
     // $fillable = 複数代入の脆弱性に対応するために必要
-    protected $fillable = ['subjects_id','deleted_at','billing_companie','address','telephone','billing_department','billing_source'];
+    protected $fillable = ['subjects_id','billing_companie','address','telephone','billing_department','billing_source'];
 
     /**
      *ドキュメントコメント

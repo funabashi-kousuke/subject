@@ -22,7 +22,6 @@ class BillingCompanyController extends Controller
      */
     public function store(Request $request )
     {
-
         // バリデーション
         $validated = $request->validate([
             'subjects_id' => ['required'],
@@ -32,7 +31,18 @@ class BillingCompanyController extends Controller
             'billing_department' =>['required','string'],
             'billing_source' => ['required','string']
         ]);
-
         $this->billing_company->fill($validated)->save();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $billing_company = BillingCompany::FindOrFail($id);
+        return response()->json($billing_company );
     }
 }

@@ -51,7 +51,31 @@ class BillingCompanyControllerTest extends TestCase
     }
 
     /**
-    *@test
+    * @test
+    */
+    public function 請求先情報の新規登録時にsubjects_idがnullだった場合に新規登録が失敗する()
+    {
+        $subject = Subject::factory()->create();
+        $params = [
+            // 外部キー制約をかけた親モデルのPK
+            'subjects_id' => null,
+            // 請求元会社名
+            'billing_source' => '請求元会社',
+            // 請求先会社名
+            'billing_companie' => 'jirou会社',
+            // 住所
+            'address' => '東京都',
+            // 電話番号
+            'telephone' => '0123456789',
+            // 部署名
+            'billing_department' => 'A部'
+        ];
+        $res = $this->postJson(route('api.billing_company.create'), $params);
+        $res->assertstatus(422);
+        }
+
+    /**
+    * @test
     */
     public function 請求先情報の新規登録時にbilling_sourceがnullだった場合に新規登録が失敗する()
     {
@@ -195,4 +219,15 @@ class BillingCompanyControllerTest extends TestCase
         $res->assertstatus(404);
     }
     // showアクションに関するテスト
+
+    // updateアクションに関するテスト
+        /**
+         * @test
+         */
+        // public function BillingCompanyの更新処理が成功する()
+        // {
+        //     $billing_company = BillingCompany::factory()->create();
+        //     $res = $this->putJson(route('api.billing_company.update',))
+        // }
+    // updateアクションに関するテスト
 }

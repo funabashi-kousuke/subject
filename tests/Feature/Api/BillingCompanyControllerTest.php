@@ -196,8 +196,14 @@ class BillingCompanyControllerTest extends TestCase
      */
     public function BillingCompanyの詳細取得が成功する()
     {
-        $subject = Subject::factory()->create();
-        $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+        /**
+        *$subject = Subject::factory()->create();
+        *$billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+        *上2行の記述はSubjectのオブジェクトを作成した後にBillingCompanyのオブジェクトを作成した際にsubjects_idにSubjectの主キーを代入することを意図して書いていたものだが、
+        *BillingCompanyFactory.php内の下の記述によりsubjects_idにはオブジェクト作成時に勝手に値が代入される
+        *'subjects_id' => Subject::factory(),
+        */
+        $billing_company = BillingCompany::factory()->create();
         $res = $this->getJson(route('api.billing_company.show',$billing_company->id));
         $res->assertstatus(200);
         $res->assertJson([

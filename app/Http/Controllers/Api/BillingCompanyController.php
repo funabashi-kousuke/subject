@@ -45,4 +45,25 @@ class BillingCompanyController extends Controller
         $billing_company = BillingCompany::FindOrFail($id);
         return response()->json($billing_company );
     }
+
+    /**
+     * Update the specified resource in storage.
+     * update function
+     * @param  Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, int $id)
+    {
+        $validated = $request->validate([
+            'subjects_id' => ['required'],
+            'billing_companie' => ['required','string'],
+            'address' => ['required','string'],
+            'telephone' => ['required','regex:/^[0-9]+$/'],
+            'billing_department' =>['required','string'],
+            'billing_source' => ['required','string']
+        ]);
+        $this->billing_company->findOrFail($id)->update($validated);
+        return response()->json($validated);
+    }
 }

@@ -232,15 +232,16 @@ class BillingCompanyControllerTest extends TestCase
          */
         public function BillingCompanyの更新処理が成功する()
         {
-            $billing_company = BillingCompany::factory()->create();
+            $subject = Subject::factory()->create();
+            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
+            'subjects_id' => $subject->id,
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',
             'address' => '東京都',
             'telephone' => '123456789',
             'billing_department' => '部署名',
             ]);
-
             $this->assertDatabaseHas('billing_companies', [
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',

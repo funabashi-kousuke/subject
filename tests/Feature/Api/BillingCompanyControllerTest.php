@@ -184,5 +184,15 @@ class BillingCompanyControllerTest extends TestCase
             'billing_department' => $billing_company->billing_department,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function BillingCompanyの存在しないidが指定された場合は詳細取得が失敗する()
+    {
+        $billing_company = BillingCompany::factory()->create();
+        $res = $this->getJson(route('api.billing_company.show',++$billing_company->id));
+        $res->assertstatus(404);
+    }
     // showアクションに関するテスト
 }

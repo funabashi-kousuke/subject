@@ -182,7 +182,6 @@ class BillingCompanyControllerTest extends TestCase
             'address' => $billing_company->address,
             'telephone' => $billing_company->telephone,
             'billing_department' => $billing_company->billing_department,
-            
         ]);
     }
     // showアクションに関するテスト

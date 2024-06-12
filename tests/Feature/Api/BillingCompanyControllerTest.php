@@ -110,5 +110,23 @@ class BillingCompanyControllerTest extends TestCase
             $res->assertstatus(422);
         }
 
+        /**
+         * @test
+         */
+        public function 請求先情報の新規作成時にtelephoneがnullだった場合に新規登録が失敗する()
+        {
+            $subject = Subject::factory()->create();
+            $params = [
+                'subject_id' => $subject->id,
+                'billing_source' => '請求元会社',
+                'billing_companie' => '請求先会社',
+                'address' => '東京都',
+                'telephone' =>null,
+                'billing_department' => 'A部'
+            ];
+            $res = $this->postJson(route('api.billing_company.create'),$params);
+            $res->assertstatus(422);
+        }
+
     // storeアクションに関するテスト
 }

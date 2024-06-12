@@ -131,7 +131,25 @@ class BillingCompanyControllerTest extends TestCase
         /**
          * @test
          */
-        public function 請求先情報の新規作成時にbilling_departmentがnullだった場合に新規登録が失敗する()
+        public function 請求先情報の新規作成時にtelephoneがアルファベットで構成されていた場合に新規登録が失敗する()
+        {
+            $subject = Subject::factory()->create();
+            $params = [
+                'subject_id' => $subject->id,
+                'billing_source' => '請求元会社',
+                'billing_companie' => '請求先会社',
+                'address' => '東京都',
+                'telephone' => 'aaaaaaaaaaa',
+                'billing_department' => 'A部'
+            ];
+            $res = $this->postJson(route('api.billing_company.create'),$params);
+            $res->assertstatus(422);
+        }
+
+        /**
+         * @test
+         */
+        public function 請求先情報の新規作成時にがnullだった場合に新規登録が失敗する()
         {
             $subject = Subject::factory()->create();
             $params = [

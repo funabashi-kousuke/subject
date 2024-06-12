@@ -165,4 +165,24 @@ class BillingCompanyControllerTest extends TestCase
         }
 
     // storeアクションに関するテスト
+
+    // showアクションに関するテスト
+    /**
+     * @test
+     */
+    public function BillingCompanyの詳細取得が成功する()
+    {
+        $subject = Subject::factory()->create();
+        $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+        $res = $this->getJson(route('api.billing_company.show',$billing_company->id));
+        $res->assertstatus(200);
+        $res->assertJson([
+            'billing_source' =>  $billing_company->billing_source,
+            'billing_companie' => $billing_company->billing_companie,
+            'address' => $billing_company->address,
+            'telephone' => $billing_company->telephone,
+            'billing_department' => $billing_company->billing_department,
+        ]);
+    }
+    // showアクションに関するテスト
 }

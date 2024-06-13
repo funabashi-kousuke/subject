@@ -266,7 +266,25 @@ class BillingCompanyControllerTest extends TestCase
             'telephone' => '123456789',
             'billing_department' => '部署名',
             ]);
-            $res->assertstatus(422));
+            $res->assertstatus(422);
+        }
+
+        /**
+         * @test
+         */
+        public function BillingCompanyの更新処理の際にbilling_sorceがnulだった場合に失敗する()
+        {
+            $subject = Subject::factory()->create();
+            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
+            'subjects_id' => null,
+            'billing_source' =>  '請求元名',
+            'billing_companie' => '請求先名',
+            'address' => '東京都',
+            'telephone' => '123456789',
+            'billing_department' => '部署名',
+            ]);
+            $res->assertstatus(422);
         }
     // updateアクションに関するテスト
 }

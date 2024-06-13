@@ -376,5 +376,23 @@ class BillingCompanyControllerTest extends TestCase
             ]);
             $res->assertstatus(422);
         }
+
+        /**
+         * @test
+         */
+        public function BillingCompanyの更新処理の際にbilling_departmentがnullだった場合に失敗する()
+        {
+            $subject = Subject::factory()->create();
+            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
+            'subjects_id' => $subject->id,
+            'billing_source' =>  '請求元名',
+            'billing_companie' => '請求先名',
+            'address' => '東京都',
+            'telephone' => '123456789',
+            'billing_department' => null,
+            ]);
+            $res->assertstatus(422);
+        }
     // updateアクションに関するテスト
 }

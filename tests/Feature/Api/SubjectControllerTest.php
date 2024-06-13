@@ -268,7 +268,7 @@ class SubjectControllerTest extends TestCase
     /**
      * @test
      */
-    public function 削除が成功する(): void
+    public function 削除が成功する()
     {
         // idが1の会社情報を作成してdbに保存
         $subject = Subject::factory()->create([

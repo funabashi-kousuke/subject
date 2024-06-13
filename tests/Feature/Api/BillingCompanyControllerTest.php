@@ -395,4 +395,26 @@ class BillingCompanyControllerTest extends TestCase
             $res->assertstatus(422);
         }
     // updateアクションに関するテスト
+
+    // deleteアクションに関するテスト
+        /**
+         * @test
+         */
+        public function BillingCompanyの削除が成功する()
+        {
+            $billing_company = BillingCompany::factory()->create([
+                'id' => 1
+            ]);
+
+            $this->assertDatabaseHas(BillingCompany::Class, [
+            'id' => $billing_company->id
+            ]);
+
+            $this->delete(route('api.billing_company.destroy',$billing_company->id));
+            $this->assertSoftDeleted(BillingCompany::Class, [
+            'id' => 1,
+        ]);
+
+        }
+    // deleteアクションに関するテスト
 }

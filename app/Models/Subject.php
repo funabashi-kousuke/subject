@@ -12,12 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-
-    public function test()
-    {
-        return 'ok';
-    }
-
     use HasFactory;
     use SoftDeletes;
 
@@ -25,6 +19,15 @@ class Subject extends Model
     {
         return $this->hasMany(BillingCompany::class);
     }
+
+    protected static function booting()
+    {
+        parent::booting();
+        static::deleting(function ($subject) {
+        $subject->billing_companys()->delete();
+        });
+    }
+
     /**
     *ドキュメントコメント(このメソッドの返り値を表している)
     * @var array

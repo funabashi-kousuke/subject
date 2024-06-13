@@ -23,7 +23,7 @@ class BillingCompanyFactory extends Factory
     public function definition()
     {
         return [
-            'subjects_id' => Subject::factory(),
+            'subject_id' => Subject::factory(),
             'billing_companie' => $this->faker->company(),
             'address' => $this->faker->address(),
             'telephone' => $this->faker->phoneNumber(),

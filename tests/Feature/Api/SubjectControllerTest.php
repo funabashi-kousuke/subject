@@ -268,26 +268,26 @@ class SubjectControllerTest extends TestCase
     /**
      * @test
      */
-    // public function 削除が成功する()
-    // {
-    //     // idが1の会社情報を作成してdbに保存
-    //     $subject = Subject::factory()->create([
-    //         'id' => 1,
-    //     ]);
-    //     // idが1でfactoryで作成されたデータがdb内に存在するかを確認
-    //     $this->assertDatabaseHas(Subject::Class, [
-    //         'id' => $subject->id, /** idは1 */
-    //         'company' => $subject->company,
-    //         'address' => $subject->address,
-    //         'telephone' => $subject->telephone,
-    //         'representative' => $subject->representative
-    //     ]);
+    public function 削除が成功する()
+    {
+        // idが1の会社情報を作成してdbに保存
+        $subject = Subject::factory()->create([
+            'id' => 1,
+        ]);
+        // idが1でfactoryで作成されたデータがdb内に存在するかを確認
+        $this->assertDatabaseHas(Subject::Class, [
+            'id' => $subject->id, /** idは1 */
+            'company' => $subject->company,
+            'address' => $subject->address,
+            'telephone' => $subject->telephone,
+            'representative' => $subject->representative
+        ]);
 
-    //     // 275行目で作成した$subject(id=1)のレコードを削除してdb内にid=1のレコードが存在しないかを確認
-    //     $this->delete(route('api.subject.destroy', $subject->id));
-    //     $this->assertSoftDeleted(Subject::Class, [
-    //         'id' => $subject->id,
-    //     ]);
-    // }
+        // 275行目で作成した$subject(id=1)のレコードを削除してdb内にid=1のレコードが存在しないかを確認
+        $this->delete(route('api.subject.destroy', $subject->id));
+        $this->assertSoftDeleted(Subject::Class, [
+            'id' => $subject->id,
+        ]);
+    }
 // dleteに関するテスト
 }

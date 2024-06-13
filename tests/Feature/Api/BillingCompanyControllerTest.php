@@ -33,7 +33,7 @@ class BillingCompanyControllerTest extends TestCase
         $subject = Subject::factory()->create();
         $params = [
             // 外部キー制約をかけた親モデルのPK
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             // 請求元会社名
             'billing_source' => '太郎会社',
             // 請求先会社名
@@ -58,7 +58,7 @@ class BillingCompanyControllerTest extends TestCase
         $subject = Subject::factory()->create();
         $params = [
             // 外部キー制約をかけた親モデルのPK
-            'subjects_id' => null,
+            'subject_id' => null,
             // 請求元会社名
             'billing_source' => '請求元会社',
             // 請求先会社名
@@ -82,7 +82,7 @@ class BillingCompanyControllerTest extends TestCase
         $subject = Subject::factory()->create();
         $params = [
             // 外部キー制約をかけた親モデルのPK
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             // 請求元会社名
             'billing_source' => null,
             // 請求先会社名
@@ -233,9 +233,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理が成功する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',
             'address' => '東京都',
@@ -257,9 +257,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理の際にsubjects_idがnulだった場合に失敗する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => null,
+            'subject_id' => null,
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',
             'address' => '東京都',
@@ -275,9 +275,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理の際にbilling_sorceがnulだった場合に失敗する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             'billing_source' =>  null,
             'billing_companie' => '請求先名',
             'address' => '東京都',
@@ -293,9 +293,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理の際にbilling_companyがnulだった場合に失敗する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             'billing_source' =>  '請求元名',
             'billing_companie' => null,
             'address' => '東京都',
@@ -311,9 +311,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理の際にaddressがnulだった場合に失敗する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',
             'address' => null,
@@ -329,9 +329,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理の際にtelephoneがnulだった場合に失敗する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',
             'address' => '東京都',
@@ -347,9 +347,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理の際にtelephoneがアルファベットだった場合に失敗する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',
             'address' => '東京都',
@@ -365,9 +365,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理の際にtelephoneが平仮名だった場合に失敗する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',
             'address' => '東京都',
@@ -383,9 +383,9 @@ class BillingCompanyControllerTest extends TestCase
         public function BillingCompanyの更新処理の際にbilling_departmentがnullだった場合に失敗する()
         {
             $subject = Subject::factory()->create();
-            $billing_company = BillingCompany::factory()->create(['subjects_id' => $subject->id]);
+            $billing_company = BillingCompany::factory()->create(['subject_id' => $subject->id]);
             $res = $this->putJson(route('api.billing_company.update',$billing_company->id),[
-            'subjects_id' => $subject->id,
+            'subject_id' => $subject->id,
             'billing_source' =>  '請求元名',
             'billing_companie' => '請求先名',
             'address' => '東京都',
@@ -414,7 +414,7 @@ class BillingCompanyControllerTest extends TestCase
             $this->assertSoftDeleted(BillingCompany::Class, [
             'id' => 1,
         ]);
-
         }
     // deleteアクションに関するテスト
+
 }

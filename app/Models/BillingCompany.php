@@ -26,7 +26,7 @@ class BillingCompany extends Model
     */
 
     // $fillable = 複数代入の脆弱性に対応するために必要
-    protected $fillable = ['subjects_id','billing_companie','address','telephone','billing_department','billing_source'];
+    protected $fillable = ['subject_id','billing_companie','address','telephone','billing_department','billing_source'];
 
     /**
      *ドキュメントコメント

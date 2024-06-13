@@ -24,7 +24,7 @@ class BillingCompanyController extends Controller
     {
         // バリデーション
         $validated = $request->validate([
-            'subjects_id' => ['required'],
+            'subject_id' => ['required'],
             'billing_companie' => ['required','string'],
             'address' => ['required','string'],
             'telephone' => ['required','regex:/^[0-9]+$/'],
@@ -56,7 +56,7 @@ class BillingCompanyController extends Controller
     public function update(Request $request, int $id)
     {
         $validated = $request->validate([
-            'subjects_id' => ['required'],
+            'subject_id' => ['required'],
             'billing_companie' => ['required','string'],
             'address' => ['required','string'],
             'telephone' => ['required','regex:/^[0-9]+$/'],

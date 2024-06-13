@@ -66,4 +66,14 @@ class BillingCompanyController extends Controller
         $this->billing_company->findOrFail($id)->update($validated);
         return response()->json($validated);
     }
+
+    /**
+    * destroy function
+    * @param int $id
+    * @return Response
+    */
+    public function destroy(int $id)
+    {
+        $this->billing_company->findOrFail($id)->delete();
+    }
 }

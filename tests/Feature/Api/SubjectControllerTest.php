@@ -289,5 +289,14 @@ class SubjectControllerTest extends TestCase
             'id' => $subject->id,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function 親テーブルのレコードを削除した際に紐づく子テーブルのレコードも削除される()
+    {
+        $subject = Subject::factory()->create();
+        dd($subject);
+    }
 // dleteに関するテスト
 }

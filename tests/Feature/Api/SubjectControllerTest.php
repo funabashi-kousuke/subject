@@ -4,6 +4,7 @@ namespace Tests\Feature\Api;
 
 // Subjectモデルをインポート
 use App\Models\Subject;
+use App\Models\BillingCompany;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -285,6 +286,7 @@ class SubjectControllerTest extends TestCase
 
         // 275行目で作成した$subject(id=1)のレコードを削除してdb内にid=1のレコードが存在しないかを確認
         $this->delete(route('api.subject.destroy', $subject->id));
+
         $this->assertSoftDeleted(Subject::Class, [
             'id' => $subject->id,
         ]);
@@ -295,8 +297,24 @@ class SubjectControllerTest extends TestCase
      */
     public function 親テーブルのレコードを削除した際に紐づく子テーブルのレコードも削除される()
     {
-        $subject = Subject::factory()->create();
-        dd($subject);
+        // idが1のSubjectモデルのインスタンスを作成
+        $subject = Subject::factory()->create([
+            'id' => 1
+        ]);
+        // 300行目で作成した$subjectに紐づくBillingCompanyのインスタンスを作成
+        $billing_company = BillingCompany::factory()->create([
+            'id' => 1,
+            'subject_id' => $subject->id
+        ]);
+        $res = $this->delete(route('api.subject.destroy', $subject->id));
+        // 309行目で削除した$subjectが論理削除できているか確認
+        $this->assertSoftDeleted(Subject::Class, [
+            'id' => $subject->id,
+        ]);
+        // 309行目で削除した$subjectに紐づくBillingCompanyのレコードが一緒に論理削除されているかを確認
+        $this->assertSoftDeleted(BillingCompany::Class, [
+            'id' => $billing_company->id,
+        ]);
     }
 // dleteに関するテスト
 }

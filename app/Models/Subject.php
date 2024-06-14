@@ -15,17 +15,17 @@ class Subject extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function billing_companys()
+    protected static function boot()
     {
-        return $this->hasMany(BillingCompany::class);
-    }
-
-    protected static function booting()
-    {
-        parent::booting();
+        parent::boot();
         static::deleting(function ($subject) {
         $subject->billing_companys()->delete();
         });
+    }
+
+    public function billing_companys()
+    {
+        return $this->hasMany(BillingCompany::class,'subject_id','id');
     }
 
     /**

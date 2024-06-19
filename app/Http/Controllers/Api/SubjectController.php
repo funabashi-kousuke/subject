@@ -56,7 +56,7 @@ class SubjectController extends Controller
      */
     public function show($id)
     {
-        $subject = Subject::with('billing_companys')->FindOrFail($id);
+        $subject = Subject::with('billing_company')->FindOrFail($id);
         return response()->json( $subject );
     }
 

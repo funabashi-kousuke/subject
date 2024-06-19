@@ -19,13 +19,13 @@ class Subject extends Model
     {
         parent::boot();
         static::deleting(function ($subject) {
-        $subject->billing_companys()->delete();
+        $subject->billing_company()->delete();
         });
     }
 
-    public function billing_companys()
+    public function billing_company()
     {
-        return $this->hasMany(BillingCompany::class,'subject_id','id');
+        return $this->hasOne(BillingCompany::class,'subject_id','id');
     }
 
     /**

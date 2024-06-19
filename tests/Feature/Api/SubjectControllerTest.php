@@ -176,8 +176,18 @@ class SubjectControllerTest extends TestCase
         $billing_company = BillingCompany::factory()->create([
             'subject_id' => 1
         ]);
+        // $subjectの詳細を$resに格納
         $res = $this->getJson(route('api.subject.show',$subject->id));
-        dd($res);
+        // $resで$billing_companyの情報も取得することができるかを確認
+        $res->assertJson([
+            'billing_company' => [
+                'billing_source' =>  $billing_company->billing_source,
+                'billing_companie' => $billing_company->billing_companie,
+                'address' => $billing_company->address,
+                'telephone' => $billing_company->telephone,
+                'billing_department' => $billing_company->billing_department
+            ]
+        ]);
     }
 //showアクションに関するテスト
 
@@ -288,13 +298,10 @@ class SubjectControllerTest extends TestCase
      */
     public function 削除が成功する()
     {
-        // idが1の会社情報を作成してdbに保存
-        $subject = Subject::factory()->create([
-            'id' => 1,
-        ]);
+        $subject = Subject::factory()->create();
         // idが1でfactoryで作成されたデータがdb内に存在するかを確認
         $this->assertDatabaseHas(Subject::Class, [
-            'id' => $subject->id, /** idは1 */
+            'id' => $subject->id,
             'company' => $subject->company,
             'address' => $subject->address,
             'telephone' => $subject->telephone,
@@ -303,7 +310,6 @@ class SubjectControllerTest extends TestCase
 
         // 275行目で作成した$subject(id=1)のレコードを削除してdb内にid=1のレコードが存在しないかを確認
         $this->delete(route('api.subject.destroy', $subject->id));
-
         $this->assertSoftDeleted(Subject::Class, [
             'id' => $subject->id,
         ]);
@@ -315,12 +321,9 @@ class SubjectControllerTest extends TestCase
     public function 親テーブルのレコードを削除した際に紐づく子テーブルのレコードも削除される()
     {
         // idが1のSubjectモデルのインスタンスを作成
-        $subject = Subject::factory()->create([
-            'id' => 1
-        ]);
+        $subject = Subject::factory()->create();
         // 300行目で作成した$subjectに紐づくBillingCompanyのインスタンスを作成
         $billing_company = BillingCompany::factory()->create([
-            'id' => 1,
             'subject_id' => $subject->id
         ]);
         $res = $this->delete(route('api.subject.destroy', $subject->id));

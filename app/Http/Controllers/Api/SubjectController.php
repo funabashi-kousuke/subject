@@ -8,6 +8,7 @@ use App\Models\BillingCompany;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Requests\StoreSubjectRequest;
 
 class SubjectController extends Controller
 {
@@ -20,32 +21,15 @@ class SubjectController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\StoreSubjectRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSubjectRequest $request)
     {
-        //変数$validatedにバリデーションをかける
-        $validated = $request->validate([
-            // 配列でバリデーションルールを定義
-            'company' => ['required','string'],
-            'address' => ['required','string'],
-            'telephone' => ['required','regex:/^[0-9]+$/'],
-            'representative' => ['required','string']
-
-            /**
-            * パイプ区切りでバリデーションルールを定義
-            *'company' => 'required|string',
-            *'address' => 'required|string',
-            *'telephone' => 'required|regex:/^[0-9]+$/|size:11'
-            *'representative' => 'required|string'
-            */
-        ]);
-
+        // バリデーション済みデータの取得
+        $validated = $request->validated();
         // DBへの保存処理
         $this->subject->fill($validated)->save();
-
-        return ['message' => 'ok'];
     }
 
     /**

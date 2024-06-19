@@ -162,6 +162,23 @@ class SubjectControllerTest extends TestCase
         $res = $this->getJson(route('api.subject.show',++$subject->id));
         $res->assertstatus(404);
     }
+
+    /**
+     * @test
+     */
+    public function Subjectの詳細を取得した際subjectの詳細を取得した際に紐づいたBillingCompanyの詳細も取得できる()
+    {
+        // Subjectのインスタンスを作成
+        $subject = Subject::factory()->create([
+            'id' => 1
+        ]);
+        // 上で作成したSubjectのインスタンスに紐づくBillingCompanyのインスタンスを作成
+        $billing_company = BillingCompany::factory()->create([
+            'subject_id' => 1
+        ]);
+        $res = $this->getJson(route('api.subject.show',$subject->id));
+        dd($res);
+    }
 //showアクションに関するテスト
 
 //updateアクションに関するテスト

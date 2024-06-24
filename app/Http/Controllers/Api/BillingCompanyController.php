@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBillingCompanyRequest;
+use App\Http\Requests\UpdateBillingCompanyRequest;
 
 class BillingCompanyController extends Controller
 {
@@ -43,20 +44,13 @@ class BillingCompanyController extends Controller
     /**
      * Update the specified resource in storage.
      * update function
-     * @param  Request  $request
+     * @param  UpdateBillingCompanyRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(UpdateBillingCompanyRequest $request, int $id)
     {
-        $validated = $request->validate([
-            'subject_id' => ['required'],
-            'billing_companie' => ['required','string'],
-            'address' => ['required','string'],
-            'telephone' => ['required','regex:/^[0-9]+$/'],
-            'billing_department' =>['required','string'],
-            'billing_source' => ['required','string']
-        ]);
+        $validated = $request->validated();
         $this->billing_company->findOrFail($id)->update($validated);
         return response()->json($validated);
     }

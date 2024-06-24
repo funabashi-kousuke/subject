@@ -7,6 +7,7 @@ use App\Models\Subject;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBillingCompanyRequest;
 
 class BillingCompanyController extends Controller
 {
@@ -17,20 +18,13 @@ class BillingCompanyController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreBillingCompanyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request )
+    public function store(StoreBillingCompanyRequest $request )
     {
         // バリデーション
-        $validated = $request->validate([
-            'subject_id' => ['required'],
-            'billing_companie' => ['required','string'],
-            'address' => ['required','string'],
-            'telephone' => ['required','regex:/^[0-9]+$/'],
-            'billing_department' =>['required','string'],
-            'billing_source' => ['required','string']
-        ]);
+        $validated = $request->validated();
         $this->billing_company->fill($validated)->save();
     }
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Requests\StoreSubjectRequest;
+use App\Http\Requests\UpdateSubjectRequest;
 
 class SubjectController extends Controller
 {
@@ -47,18 +48,13 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      * update function
-     * @param  Request  $request
+     * @param  App\Http\Requests\UpdateSubjectRequest;  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $id)
+    public function update(UpdateSubjectRequest $request, int $id)
     {
-        $validated = $request->validate([
-            'company' => ['required','string'],
-            'address' => ['required','string'],
-            'telephone' => ['required','regex:/^[0-9]+$/'],
-            'representative' => ['required','string']
-        ]);
+        $validated = $request->validated();
         $this->subject->findOrFail($id)->update($validated);
         return response()->json($validated);
     }

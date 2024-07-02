@@ -48,6 +48,13 @@ class BillingCompanyControllerTest extends TestCase
 
         $res = $this->postJson(route('api.billing_company.create'), $params);
         $res->assertOK();
+        $this->assertDatabaseHas('billing_companies', [
+            'billing_source' =>  '太郎会社',
+            'billing_companie' => 'jirou会社',
+            'address' => '東京都',
+            'telephone' => '0123456789',
+            'billing_department' => 'A部',
+            ]);
     }
 
     /**

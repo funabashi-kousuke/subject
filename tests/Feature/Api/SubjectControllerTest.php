@@ -47,11 +47,18 @@ class SubjectControllerTest extends TestCase
         //$subjectに35行目で定義された$subjectsに格納されている１つ目のレコードを格納
         $subject = $subjects->first();
 
-        //第一引数と第二引数の値が同じものかを検証
-        // $this->assertEquals($params['company'], $subject->company);
-        // $this->assertEquals($params['address'], $subject->address);
-        // $this->assertEquals($params['telephone'], $subject->telephone);
-        // $this->assertEquals($params['representative'], $subject->representative);
+        // 第一引数と第二引数の値が同じものかを検証
+        $this->assertEquals($params['company'], $subject->company);
+        $this->assertEquals($params['address'], $subject->address);
+        $this->assertEquals($params['telephone'], $subject->telephone);
+        $this->assertEquals($params['representative'], $subject->representative);
+
+        $this->assertDatabaseHas('subjects', [
+            'company' => $subject->company,
+            'address' => $subject->address,
+            'telephone' => $subject->telephone,
+            'representative' => $subject->representative
+        ]);
     }
 
     /**

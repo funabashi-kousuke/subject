@@ -54,10 +54,10 @@ class SubjectControllerTest extends TestCase
         $this->assertEquals($params['representative'], $subject->representative);
 
         $this->assertDatabaseHas('subjects', [
-            'company' => $subject->company,
-            'address' => $subject->address,
-            'telephone' => $subject->telephone,
-            'representative' => $subject->representative
+            'company' => '太郎会社',
+            'address' => '東京都',
+            'telephone' => '000000000000',
+            'representative' => '太郎'
         ]);
     }
 

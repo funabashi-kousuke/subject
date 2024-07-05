@@ -49,11 +49,11 @@ class BillingCompanyControllerTest extends TestCase
         $res = $this->postJson(route('api.billing_company.create'), $params);
         $res->assertOK();
         $this->assertDatabaseHas('billing_companies', [
-            'billing_source' =>  '太郎会社',
-            'billing_companie' => 'jirou会社',
-            'address' => '東京都',
-            'telephone' => '0123456789',
-            'billing_department' => 'A部',
+            'billing_source' =>  $params['billing_source'],
+            'billing_companie' => $params['billing_companie'],
+            'address' => $params['address'],
+            'telephone' => $params['telephone'],
+            'billing_department' => $params['billing_department'],
             ]);
     }
 
@@ -250,11 +250,11 @@ class BillingCompanyControllerTest extends TestCase
             'billing_department' => '部署名',
             ]);
             $this->assertDatabaseHas('billing_companies', [
-            'billing_source' =>  '請求元名',
-            'billing_companie' => '請求先名',
-            'address' => '東京都',
-            'telephone' => '123456789',
-            'billing_department' => '部署名',
+            'billing_source' =>  $res['billing_source'],
+            'billing_companie' => $res['billing_companie'],
+            'address' => $res['address'],
+            'telephone' => $res['telephone'],
+            'billing_department' => $res['billing_department'],
             ]);
         }
 
